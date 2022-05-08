@@ -1,7 +1,11 @@
 package model
 
 type Article struct {
-	Id          int64  `json:"id"`
+	Id         int64            `json:"id"`
+	Attributes ArticleAttribute `json:"attributes"`
+}
+
+type ArticleAttribute struct {
 	Title       string `json:"title"`
 	Content     string `json:"content"`
 	Description string `json:"description"`
