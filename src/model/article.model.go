@@ -1,24 +1,20 @@
 package model
 
 type ArticlePayload struct {
-	Id         int64            `json:"id"`
-	Attributes ArticleAttribute `json:"attributes"`
-}
-
-type ArticleAttribute struct {
-	Title                 string                `json:"title"`
-	Content               string                `json:"content"`
-	Description           string                `json:"description"`
-	CreatedAt             string                `json:"createdAt"`
-	UpdatedAt             string                `json:"updatedAt"`
-	PublishedAt           string                `json:"publishedAt"`
-	Locale                string                `json:"locale"`
-	Slug                  string                `json:"slug"`
-	Thumnail              ArticleThumnail       `json:"thumnail"`
-	Categories            Categories            `json:"categories"`
-	UsersPermissionsUsers UsersPermissionsUsers `json:"users_permissions_users"`
-	Advisors              Advisors              `json:"advisors"`
-	Courses               Courses               `json:"courses"`
+	Id                    int64                   `json:"id"`
+	Title                 string                  `json:"title"`
+	Content               string                  `json:"content"`
+	Description           string                  `json:"description"`
+	CreatedAt             string                  `json:"createdAt"`
+	UpdatedAt             string                  `json:"updatedAt"`
+	PublishedAt           string                  `json:"publishedAt"`
+	Locale                string                  `json:"locale"`
+	Slug                  string                  `json:"slug"`
+	Thumnail              ArticleThumnail         `json:"thumnail"`
+	Categories            []Categories            `json:"categories"`
+	UsersPermissionsUsers []UsersPermissionsUsers `json:"users_permissions_users"`
+	Advisors              []Advisors              `json:"advisors"`
+	Courses               []Courses               `json:"courses"`
 }
 
 type Articles struct {
