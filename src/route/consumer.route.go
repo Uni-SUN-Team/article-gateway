@@ -9,4 +9,5 @@ import (
 func Consumer(r *gin.RouterGroup) {
 	r.GET("/articles", controller.ArticleAll)
 	r.GET("/articles/:id", controller.ArticleById)
+	r.GET("/articles/slug/:slug", controller.ArticleBySlug)
 }

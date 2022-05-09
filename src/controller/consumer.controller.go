@@ -49,3 +49,22 @@ func ArticleById(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, gin.H{"error": err, "data": articles})
 }
+
+func ArticleBySlug(c *gin.Context) {
+	slug := c.Param("slug")
+	populate := c.DefaultQuery("populate", "*")
+	var articles model.Articles
+	var payloadRequest = model.ServiceIncomeRequest{}
+	payloadRequest.Path = os.Getenv(constants.PATH_STRAPI_ARTICLE) + "/?filters[slug][$eq]=" + slug + "&populate=" + populate
+	payloadRequest.Method = constants.GET
+	payloadRequest.Body = nil
+
+	data := service.GetArticles(payloadRequest)
+	err := json.Unmarshal([]byte(data.Payload), &articles)
+	if err != nil {
+		log.Println("Change byte to json article", err.Error())
+	} else {
+		err = nil
+	}
+	c.JSON(http.StatusOK, gin.H{"error": err, "data": articles})
+}
