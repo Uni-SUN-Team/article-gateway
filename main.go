@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	if os.Getenv(constants.PORT) != constants.PRODUCTION {
+	if os.Getenv(constants.NODE) != constants.PRODUCTION {
 		config.ConfigENV()
 	}
 	r := src.App()

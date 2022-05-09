@@ -3,7 +3,7 @@ package config
 import "os"
 
 func ConfigENV() {
-	os.Setenv("PORT", "8082")
+	os.Setenv("PORT", "8080")
 	os.Setenv("CONTEXT_PATH", "/article-listening")
 	// Strapi information gateway
 	os.Setenv("HOST_STRAPI_SERVICE", "https://api.unisun.dynu.com")
