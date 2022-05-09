@@ -4,7 +4,7 @@ ENV NODE=production
 ENV PORT=8080
 ENV CONTEXT_PATH=/article-listening
 ENV PATH_STRAPI_ARTICLE=/api/articles
-ENV HOST_STRAPI_SERVICE=http://strapi-information-gateway
+ENV HOST_STRAPI_SERVICE=http://strapi-information-gateway:8080
 ENV PATH_STRAPI_INFORMATION_GATEWAY=/strapi-information-gateway/api/strapi
 
 WORKDIR /usr/src/app
