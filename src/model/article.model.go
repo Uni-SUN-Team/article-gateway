@@ -1,5 +1,20 @@
 package model
 
+type Articles struct {
+	Data []ArticlePayloads  `json:"data"`
+	Meta ArticlesPagination `json:"meta"`
+}
+
+type ArticlesSlug struct {
+	Data []ArticlePayload   `json:"data"`
+	Meta ArticlesPagination `json:"meta"`
+}
+
+type Article struct {
+	Data ArticlePayload     `json:"data"`
+	Meta ArticlesPagination `json:"meta"`
+}
+
 type ArticlePayload struct {
 	Id                    int64                   `json:"id"`
 	Title                 string                  `json:"title"`
@@ -17,14 +32,17 @@ type ArticlePayload struct {
 	Courses               []Courses               `json:"courses"`
 }
 
-type Articles struct {
-	Data []ArticlePayload   `json:"data"`
-	Meta ArticlesPagination `json:"meta"`
-}
-
-type Article struct {
-	Data ArticlePayload     `json:"data"`
-	Meta ArticlesPagination `json:"meta"`
+type ArticlePayloads struct {
+	Id          int64        `json:"id"`
+	Title       string       `json:"title"`
+	Content     string       `json:"content"`
+	Description string       `json:"description"`
+	CreatedAt   string       `json:"createdAt"`
+	UpdatedAt   string       `json:"updatedAt"`
+	PublishedAt string       `json:"publishedAt"`
+	Locale      string       `json:"locale"`
+	Slug        string       `json:"slug"`
+	Categories  []Categories `json:"categories"`
 }
 
 type ArticlesPagination struct {

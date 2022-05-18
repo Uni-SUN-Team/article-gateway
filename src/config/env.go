@@ -1,13 +1,16 @@
 package config
 
-import "os"
+import (
+	"os"
+	"unisun/api/article-listening/src/constants"
+)
 
 func ConfigENV() {
-	os.Setenv("PORT", "8080")
-	os.Setenv("CONTEXT_PATH", "/article-listening")
+	os.Setenv(constants.PORT, "8080")
+	os.Setenv(constants.CONTEXT_PATH, "/article-listening")
 	// Strapi information gateway
-	os.Setenv("HOST_STRAPI_SERVICE", "https://api.unisun.dynu.com")
-	os.Setenv("PATH_STRAPI_INFORMATION_GATEWAY", "/strapi-information-gateway/api/strapi")
+	os.Setenv(constants.HOST_STRAPI_SERVICE, "https://api.unisun.dynu.com")
+	os.Setenv(constants.PATH_STRAPI_INFORMATION_GATEWAY, "/strapi-information-gateway/api/strapi")
 	// Path
-	os.Setenv("PATH_STRAPI_ARTICLE", "/api/articles")
+	os.Setenv(constants.PATH_STRAPI_ARTICLE, "/api/articles")
 }

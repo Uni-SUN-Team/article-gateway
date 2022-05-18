@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 	"unisun/api/article-listening/src/constants"
 	"unisun/api/article-listening/src/model"
 	"unisun/api/article-listening/src/service"
@@ -14,11 +15,11 @@ import (
 
 func ArticleAll(c *gin.Context) {
 	var payloadRequest = model.ServiceIncomeRequest{}
-	payloadRequest.Path = os.Getenv(constants.PATH_STRAPI_ARTICLE)
+	payloadRequest.Path = os.Getenv(constants.PATH_STRAPI_ARTICLE) + "?populate[categories]=*"
 	payloadRequest.Method = constants.GET
 	payloadRequest.Body = nil
 	if query := c.Request.URL.RawQuery; query != "" {
-		payloadRequest.Path += "?" + query
+		payloadRequest.Path += "&" + strings.Trim(query, "?")
 	}
 	var articles model.Articles
 	data := service.GetArticles(payloadRequest)
@@ -28,15 +29,14 @@ func ArticleAll(c *gin.Context) {
 	} else {
 		err = nil
 	}
-	c.JSON(http.StatusOK, gin.H{"error": err, "data": articles})
+	c.JSON(http.StatusOK, gin.H{"error": err, "result": articles.Data, "pagination": articles.Meta.Pagination})
 }
 
 func ArticleById(c *gin.Context) {
 	id := c.Param("id")
-	populate := c.DefaultQuery("populate", "*")
 	var articles model.Article
 	var payloadRequest = model.ServiceIncomeRequest{}
-	payloadRequest.Path = os.Getenv(constants.PATH_STRAPI_ARTICLE) + "/" + id + "?populate=" + populate
+	payloadRequest.Path = os.Getenv(constants.PATH_STRAPI_ARTICLE) + "/" + id + "?populate[categories]=*&populate[advisors][populate]=thumnail&populate[courses][populate][0]=thumnail&populate[users_permissions_users]=*&populate[thumnail]=*"
 	payloadRequest.Method = constants.GET
 	payloadRequest.Body = nil
 
@@ -47,15 +47,14 @@ func ArticleById(c *gin.Context) {
 	} else {
 		err = nil
 	}
-	c.JSON(http.StatusOK, gin.H{"error": err, "data": articles})
+	c.JSON(http.StatusOK, gin.H{"error": err, "result": articles.Data})
 }
 
 func ArticleBySlug(c *gin.Context) {
 	slug := c.Param("slug")
-	populate := c.DefaultQuery("populate", "*")
-	var articles model.Articles
+	var articles model.ArticlesSlug
 	var payloadRequest = model.ServiceIncomeRequest{}
-	payloadRequest.Path = os.Getenv(constants.PATH_STRAPI_ARTICLE) + "/?filters[slug][$eq]=" + slug + "&populate=" + populate
+	payloadRequest.Path = os.Getenv(constants.PATH_STRAPI_ARTICLE) + "?populate[categories]=*&populate[advisors][populate]=*&populate[courses][populate][0]=thumnail&populate[users_permissions_users]=*&populate[thumnail]=*&filters[slug][$eq]=" + slug
 	payloadRequest.Method = constants.GET
 	payloadRequest.Body = nil
 
@@ -66,5 +65,6 @@ func ArticleBySlug(c *gin.Context) {
 	} else {
 		err = nil
 	}
-	c.JSON(http.StatusOK, gin.H{"error": err, "data": articles})
+	article := articles.Data[0]
+	c.JSON(http.StatusOK, gin.H{"error": err, "result": article})
 }
