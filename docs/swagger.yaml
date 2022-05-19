@@ -1,0 +1,440 @@
+definitions:
+  model.Advisors:
+    properties:
+      active:
+        type: boolean
+      content:
+        type: string
+      createdAt:
+        type: string
+      dob:
+        type: string
+      email:
+        type: string
+      full_name:
+        type: string
+      id:
+        type: integer
+      locale:
+        type: string
+      publishedAt:
+        type: string
+      short_content:
+        type: string
+      slug:
+        type: string
+      telephone:
+        type: string
+      thumnail:
+        $ref: '#/definitions/model.ArticleThumnail'
+        type: object
+      updatedAt:
+        type: string
+    type: object
+  model.ArticlePayload:
+    properties:
+      advisors:
+        items:
+          $ref: '#/definitions/model.Advisors'
+        type: array
+      categories:
+        items:
+          $ref: '#/definitions/model.Categories'
+        type: array
+      content:
+        type: string
+      courses:
+        items:
+          $ref: '#/definitions/model.Courses'
+        type: array
+      createdAt:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      locale:
+        type: string
+      publishedAt:
+        type: string
+      slug:
+        type: string
+      thumnail:
+        $ref: '#/definitions/model.ArticleThumnail'
+        type: object
+      title:
+        type: string
+      updatedAt:
+        type: string
+      users_permissions_users:
+        items:
+          $ref: '#/definitions/model.UsersPermissionsUsers'
+        type: array
+    type: object
+  model.ArticlePayloads:
+    properties:
+      categories:
+        items:
+          $ref: '#/definitions/model.Categories'
+        type: array
+      content:
+        type: string
+      createdAt:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      locale:
+        type: string
+      publishedAt:
+        type: string
+      slug:
+        type: string
+      title:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  model.ArticleThumnail:
+    properties:
+      alternativeText:
+        type: string
+      caption:
+        type: string
+      createdAt:
+        type: string
+      ext:
+        type: string
+      formats:
+        $ref: '#/definitions/model.ArticleThumnailDataAttributesFormat'
+        type: object
+      hash:
+        type: string
+      height:
+        type: integer
+      id:
+        type: integer
+      mime:
+        type: string
+      name:
+        type: string
+      previewUrl:
+        type: string
+      provider:
+        type: string
+      provider_metadata:
+        type: string
+      size:
+        type: number
+      updatedAt:
+        type: string
+      url:
+        type: string
+      width:
+        type: integer
+    type: object
+  model.ArticleThumnailDataAttributesFormat:
+    properties:
+      large:
+        $ref: '#/definitions/model.ArticleThumnailDataAttributesFormatLarge'
+        type: object
+      medium:
+        $ref: '#/definitions/model.ArticleThumnailDataAttributesFormatMedium'
+        type: object
+      small:
+        $ref: '#/definitions/model.ArticleThumnailDataAttributesFormatSmall'
+        type: object
+      thumbnail:
+        $ref: '#/definitions/model.ArticleThumnailDataAttributesFormatThumbnail'
+        type: object
+      xsmall:
+        $ref: '#/definitions/model.ArticleThumnailDataAttributesFormatXsmall'
+        type: object
+    type: object
+  model.ArticleThumnailDataAttributesFormatLarge:
+    properties:
+      ext:
+        type: string
+      hash:
+        type: string
+      height:
+        type: integer
+      mime:
+        type: string
+      name:
+        type: string
+      path:
+        type: string
+      size:
+        type: number
+      url:
+        type: string
+      width:
+        type: integer
+    type: object
+  model.ArticleThumnailDataAttributesFormatMedium:
+    properties:
+      ext:
+        type: string
+      hash:
+        type: string
+      height:
+        type: integer
+      mime:
+        type: string
+      name:
+        type: string
+      path:
+        type: string
+      size:
+        type: number
+      url:
+        type: string
+      width:
+        type: integer
+    type: object
+  model.ArticleThumnailDataAttributesFormatSmall:
+    properties:
+      ext:
+        type: string
+      hash:
+        type: string
+      height:
+        type: integer
+      mime:
+        type: string
+      name:
+        type: string
+      path:
+        type: string
+      size:
+        type: number
+      url:
+        type: string
+      width:
+        type: integer
+    type: object
+  model.ArticleThumnailDataAttributesFormatThumbnail:
+    properties:
+      ext:
+        type: string
+      hash:
+        type: string
+      height:
+        type: integer
+      mime:
+        type: string
+      name:
+        type: string
+      path:
+        type: string
+      size:
+        type: number
+      url:
+        type: string
+      width:
+        type: integer
+    type: object
+  model.ArticleThumnailDataAttributesFormatXsmall:
+    properties:
+      ext:
+        type: string
+      hash:
+        type: string
+      height:
+        type: integer
+      mime:
+        type: string
+      name:
+        type: string
+      path:
+        type: string
+      size:
+        type: number
+      url:
+        type: string
+      width:
+        type: integer
+    type: object
+  model.ArticlesPaginationContent:
+    properties:
+      page:
+        type: integer
+      pageCount:
+        type: integer
+      pageSize:
+        type: integer
+      total:
+        type: integer
+    type: object
+  model.Categories:
+    properties:
+      createdAt:
+        type: string
+      id:
+        type: integer
+      locale:
+        type: string
+      name:
+        type: string
+      publishedAt:
+        type: string
+      slug:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  model.Courses:
+    properties:
+      content:
+        type: string
+      createdAt:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      locale:
+        type: string
+      price:
+        type: number
+      publishedAt:
+        type: string
+      short_content:
+        type: string
+      slug:
+        type: string
+      thumnail:
+        $ref: '#/definitions/model.ArticleThumnail'
+        type: object
+      title:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  model.ResponseArticle:
+    properties:
+      error:
+        type: error
+      result:
+        $ref: '#/definitions/model.ArticlePayload'
+        type: object
+    type: object
+  model.ResponseArticlesAll:
+    properties:
+      error:
+        type: error
+      pagination:
+        $ref: '#/definitions/model.ArticlesPaginationContent'
+        type: object
+      result:
+        items:
+          $ref: '#/definitions/model.ArticlePayloads'
+        type: array
+    type: object
+  model.UsersPermissionsUsers:
+    properties:
+      agreement:
+        type: boolean
+      blocked:
+        type: boolean
+      confirmed:
+        type: boolean
+      createdAt:
+        type: string
+      dob:
+        type: string
+      email:
+        type: string
+      firstname:
+        type: string
+      gender:
+        type: string
+      id:
+        type: integer
+      lastname:
+        type: string
+      middlename:
+        type: string
+      provider:
+        type: string
+      telephone:
+        type: string
+      updatedAt:
+        type: string
+      username:
+        type: string
+    type: object
+info:
+  contact: {}
+  license: {}
+paths:
+  /article-listening/api/articles:
+    get:
+      consumes:
+      - application/json
+      description: Article Listener for the service
+      operationId: ArticleListenerHandler
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.ResponseArticlesAll'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/model.ResponseArticlesAll'
+      summary: Article Listener
+      tags:
+      - article
+  /article-listening/api/articles/:id:
+    get:
+      consumes:
+      - application/json
+      description: Article Listener for the service
+      operationId: ArticleListenerIdHandler
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.ResponseArticle'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/model.ResponseArticle'
+      summary: Article Listener
+      tags:
+      - article
+  /article-listening/api/articles/slug/:slug:
+    get:
+      consumes:
+      - application/json
+      description: Article Listener for the service
+      operationId: ArticleListenerSlugHandler
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.ResponseArticle'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/model.ResponseArticle'
+      summary: Article Listener
+      tags:
+      - article
+  /healthcheck:
+    get:
+      description: Health checking for the service
+      operationId: HealthCheckHandler
+      produces:
+      - text/plain
+      summary: Health Check
+swagger: "2.0"

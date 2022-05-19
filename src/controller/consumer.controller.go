@@ -13,8 +13,20 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// Article godoc
+// @summary      Article Listener
+// @description  Article Listener for the service
+// @id           ArticleListenerHandler
+// @tags         article
+// @accept       json
+// @produce      json
+// @success      200    {object}    model.ResponseArticlesAll    "OK"
+// @failure      400    {object}    model.ResponseArticlesAll    "Bad Request"
+// @response     500    {object}    model.ResponseArticlesAll    "Internal Server Error"
+// @router       /article-listening/api/articles [get]
 func ArticleAll(c *gin.Context) {
 	var payloadRequest = model.ServiceIncomeRequest{}
+	var response = model.ResponseArticlesAll{}
 	payloadRequest.Path = os.Getenv(constants.PATH_STRAPI_ARTICLE) + "?populate[categories]=*"
 	payloadRequest.Method = constants.GET
 	payloadRequest.Body = nil
@@ -26,16 +38,34 @@ func ArticleAll(c *gin.Context) {
 	err := json.Unmarshal([]byte(data.Payload), &articles)
 	if err != nil {
 		log.Println("Change byte to json article", err.Error())
+		response.Error = err
+		c.JSON(http.StatusBadRequest, response)
+		return
 	} else {
 		err = nil
 	}
-	c.JSON(http.StatusOK, gin.H{"error": err, "result": articles.Data, "pagination": articles.Meta.Pagination})
+	response.Error = err
+	response.Result = articles.Data
+	response.Pagination = articles.Meta.Pagination
+	c.JSON(http.StatusOK, response)
 }
 
+// Article godoc
+// @summary      Article Listener
+// @description  Article Listener for the service
+// @id           ArticleListenerIdHandler
+// @tags         article
+// @accept       json
+// @produce      json
+// @success      200    {object}    model.ResponseArticle    "OK"
+// @failure      400    {object}    model.ResponseArticle    "Bad Request"
+// @response     500    {object}    model.ResponseArticle    "Internal Server Error"
+// @router       /article-listening/api/articles/:id [get]
 func ArticleById(c *gin.Context) {
 	id := c.Param("id")
 	var articles model.Article
 	var payloadRequest = model.ServiceIncomeRequest{}
+	var response = model.ResponseArticle{}
 	payloadRequest.Path = os.Getenv(constants.PATH_STRAPI_ARTICLE) + "/" + id + "?populate[categories]=*&populate[advisors][populate]=thumnail&populate[courses][populate][0]=thumnail&populate[users_permissions_users]=*&populate[thumnail]=*"
 	payloadRequest.Method = constants.GET
 	payloadRequest.Body = nil
@@ -44,16 +74,33 @@ func ArticleById(c *gin.Context) {
 	err := json.Unmarshal([]byte(data.Payload), &articles)
 	if err != nil {
 		log.Println("Change byte to json article", err.Error())
+		response.Error = err
+		c.JSON(http.StatusBadRequest, response)
+		return
 	} else {
 		err = nil
 	}
-	c.JSON(http.StatusOK, gin.H{"error": err, "result": articles.Data})
+	response.Error = err
+	response.Result = articles.Data
+	c.JSON(http.StatusOK, response)
 }
 
+// Article godoc
+// @summary      Article Listener
+// @description  Article Listener for the service
+// @id           ArticleListenerSlugHandler
+// @tags         article
+// @accept       json
+// @produce      json
+// @success      200    {object}    model.ResponseArticle    "OK"
+// @failure      400    {object}    model.ResponseArticle    "Bad Request"
+// @response     500    {object}    model.ResponseArticle    "Internal Server Error"
+// @router       /article-listening/api/articles/slug/:slug [get]
 func ArticleBySlug(c *gin.Context) {
 	slug := c.Param("slug")
 	var articles model.ArticlesSlug
 	var payloadRequest = model.ServiceIncomeRequest{}
+	var response = model.ResponseArticle{}
 	payloadRequest.Path = os.Getenv(constants.PATH_STRAPI_ARTICLE) + "?populate[categories]=*&populate[advisors][populate]=*&populate[courses][populate][0]=thumnail&populate[users_permissions_users]=*&populate[thumnail]=*&filters[slug][$eq]=" + slug
 	payloadRequest.Method = constants.GET
 	payloadRequest.Body = nil
@@ -62,9 +109,14 @@ func ArticleBySlug(c *gin.Context) {
 	err := json.Unmarshal([]byte(data.Payload), &articles)
 	if err != nil {
 		log.Println("Change byte to json article", err.Error())
+		response.Error = err
+		c.JSON(http.StatusBadRequest, response)
+		return
 	} else {
 		err = nil
 	}
 	article := articles.Data[0]
-	c.JSON(http.StatusOK, gin.H{"error": err, "result": article})
+	response.Error = err
+	response.Result = article
+	c.JSON(http.StatusOK, response)
 }
